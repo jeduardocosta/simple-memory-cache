@@ -1,0 +1,22 @@
+version: 1.0.1.{build}
+skip_tags: true
+configuration: Release
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: 1x/Tl0QmZr7ZmIcJ3iwBBrbeq+KlVTM7yBrn5qwaGiREoi9tXtSTDYdEc2y+doxX
+before_build:
+  - nuget restore ".\Simple.MemoryCache.sln"
+build:
+  project: .\Simple.MemoryCache.sln
+  verbosity: minimal
+test_script:
+- ps: >-
+    .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:nunit-console.exe -register:user "-targetargs:""test\Simple.MemoryCache.UnitTest\bin\$env:CONFIGURATION\Simple.MemoryCache.UnitTest.dll"" /noshadow" -output:opencoverCoverage.xml
+
+    .\packages\coveralls.net.0.5.0\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
