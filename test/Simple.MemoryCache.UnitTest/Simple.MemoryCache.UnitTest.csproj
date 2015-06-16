@@ -73,6 +73,7 @@
     <Compile Include="Entities\CacheItemPolicyTest.cs" />
     <Compile Include="Entities\Converters\CacheItemPolicyConverterTest.cs" />
     <Compile Include="Entities\Converters\CacheItemPriorityConverterTest.cs" />
+    <Compile Include="Exceptions\InvalidStateExceptionTests.cs" />
     <Compile Include="MemoryCacherTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
