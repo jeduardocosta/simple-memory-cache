@@ -13,44 +13,37 @@ namespace Simple.MemoryCache.UnitTest.Exceptions
         [Test]
         public void InvalidStateException_WhenThrowAnInvalidStateException_ShouldReturnAnApplicationException()
         {
-            try
-            {
-                throw new InvalidStateException();
-            }
-            catch (InvalidStateException invalidStateException)
-            {
-                invalidStateException.Should().BeAssignableTo<ApplicationException>();
-            }
+            Action action = () => { throw new InvalidStateException(CustomErrorMessage); };
+
+            action.ShouldThrow<ApplicationException>();
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidStateException), ExpectedMessage = CustomErrorMessage)]
         public void InvalidStateException_WhenThrowAnInvalidStateExceptionWithACustomErrorMessage_ShouldReturnExpectedCustomErrorMessage()
         {
-            throw new InvalidStateException(CustomErrorMessage);
+            Action action = () => { throw new InvalidStateException(CustomErrorMessage); };
+
+            action
+                .ShouldThrow<InvalidStateException>()
+                .Which
+                .Message
+                .Should()
+                .Be(CustomErrorMessage);
         }
 
         [Test]
         public void InvalidStateException_WhenThrowAnInvalidStateExceptionWithAnInnerException_ShouldReturnExpectedInnerException()
         {
-            try
-            {
-                var four = 4;
-                var zero = 0;
+            var exception = new Exception("message");
 
-                var result = four / zero;
-            }
-            catch (DivideByZeroException divideByZeroException)
-            {
-                try
-                {
-                    throw new InvalidStateException(CustomErrorMessage, divideByZeroException);
-                }
-                catch (InvalidStateException invalidStateException)
-                {
-                    invalidStateException.InnerException.Should().Be(divideByZeroException);
-                }
-            }
+            Action action = () => { throw new InvalidStateException(CustomErrorMessage, exception); };
+
+            action
+                .ShouldThrow<InvalidStateException>()
+                .Which
+                .InnerException
+                .Should()
+                .Be(exception);
         }
     }
 }

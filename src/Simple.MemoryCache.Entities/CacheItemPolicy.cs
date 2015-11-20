@@ -56,14 +56,20 @@ namespace Simple.MemoryCache.Entities
             public CacheItemPolicy Build()
             {
                 if (AbsoluteExpiration != null && SlidingExpiration != null)
+                { 
                     throw new InvalidStateException("both AbsoluteExpiration and SlidingExpiration were specified, one should use only one of them");
-                
+                }
+
                 if (AbsoluteExpiration.HasValue && AbsoluteExpiration.Value.EqualsExact(DateTimeOffset.Now))
+                { 
                     throw new InvalidStateException("AboluteExpiration has invalid value - equals NOW");
-                
+                }
+
                 if (SlidingExpiration.HasValue && SlidingExpiration.Value.TotalMilliseconds == 0)
+                { 
                     throw new InvalidStateException("SlidingExpiration has invalid value - equals zero");
-                
+                }
+
                 return new CacheItemPolicy
                 {
                     DirectoriesOrFiles = DirectoriesOrFiles,

@@ -7,19 +7,6 @@ using Simple.MemoryCache.Entities;
 
 namespace Simple.MemoryCache
 {
-    public interface IMemoryCacher
-    {
-        void Add<T>(string key, T value, TimeSpan expiration);
-        void Add<T>(string key, T value, CacheItemPolicy policy);
-
-        T Retrieve<T>(string key);
-        T RetrieveOrElse<T>(string key, TimeSpan expiration, Func<T> retrievalDelegate);
-        T RetrieveOrElse<T>(string key, CacheItemPolicy policy, Func<T> retrievalDelegate);
-
-        void Set<T>(string key, T value, TimeSpan expiration);
-        void Set<T>(string key, T value, CacheItemPolicy policy);
-    }
-
     public class MemoryCacher : IMemoryCacher
     {
         private readonly ICacheItemPolicyConverter _cacheItemPolicyConverter;
@@ -36,10 +23,7 @@ namespace Simple.MemoryCache
             _cacheItemPriorityConverter = cacheItemPriorityConverter;
         }
 
-        private static Cache Cache
-        {
-            get { return HttpRuntime.Cache; }
-        }
+        private static Cache Cache => HttpRuntime.Cache;
 
         public void Add<T>(string key, T value, TimeSpan expiration)
         {
@@ -54,8 +38,8 @@ namespace Simple.MemoryCache
 
         public void Set<T>(string key, T value, CacheItemPolicy policy)
         {
-            var slidingExpiration = policy.SlidingExpiration.HasValue ? policy.SlidingExpiration.Value : default(TimeSpan);
-            var absoluteExpiration = policy.AbsoluteExpiration.HasValue ? policy.AbsoluteExpiration.Value.DateTime : default(DateTime);
+            var slidingExpiration = policy.SlidingExpiration ?? default(TimeSpan);
+            var absoluteExpiration = policy.AbsoluteExpiration?.DateTime ?? default(DateTime);
             var cacheItemPriority = _cacheItemPriorityConverter.Convert(policy.CacheItemPriority);
             
             Cache.Remove(key);
@@ -69,9 +53,14 @@ namespace Simple.MemoryCache
             var cacheItemPriority = _cacheItemPriorityConverter.Convert(policy.CacheItemPriority);
 
             if (policy.SlidingExpiration.HasValue)
+            {
                 slidingExpiration = policy.SlidingExpiration.Value;
+            }
+
             if (policy.AbsoluteExpiration.HasValue)
+            {
                 absoluteExpiration = policy.AbsoluteExpiration.Value.DateTime;
+            }
 
             Cache.Add(key, value, default(CacheDependency), absoluteExpiration, slidingExpiration, cacheItemPriority, default(CacheItemRemovedCallback));
         }
