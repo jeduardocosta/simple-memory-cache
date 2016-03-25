@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.MemoryCache", "src\SimpleMemoryCache\SimpleMemoryCache.csproj", "{8770466F-CA5F-4230-8042-8EA20C9681D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.MemoryCache.UnitTest", "test\SimpleMemoryCache.UnitTest\SimpleMemoryCache.UnitTest.csproj", "{E9E90799-E1C4-432F-9A7D-95678D8E10FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.MemoryCache.IntegrationTest", "test\SimpleMemoryCache.IntegrationTest\SimpleMemoryCache.IntegrationTest.csproj", "{C31327EB-002C-4B6D-BDBD-767C002394A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.MemoryCache.Entities", "src\SimpleMemoryCache.Entities\SimpleMemoryCache.Entities.csproj", "{62974D03-D56B-46EF-9FE5-3FA6E3D419E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{41A88579-FAB8-453F-A400-017D7B2EFE3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A7A9950E-0926-4625-B1AD-DD3CB0A1B3BC}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8770466F-CA5F-4230-8042-8EA20C9681D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8770466F-CA5F-4230-8042-8EA20C9681D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8770466F-CA5F-4230-8042-8EA20C9681D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8770466F-CA5F-4230-8042-8EA20C9681D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E90799-E1C4-432F-9A7D-95678D8E10FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E90799-E1C4-432F-9A7D-95678D8E10FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E90799-E1C4-432F-9A7D-95678D8E10FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E90799-E1C4-432F-9A7D-95678D8E10FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C31327EB-002C-4B6D-BDBD-767C002394A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31327EB-002C-4B6D-BDBD-767C002394A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31327EB-002C-4B6D-BDBD-767C002394A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31327EB-002C-4B6D-BDBD-767C002394A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62974D03-D56B-46EF-9FE5-3FA6E3D419E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62974D03-D56B-46EF-9FE5-3FA6E3D419E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62974D03-D56B-46EF-9FE5-3FA6E3D419E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62974D03-D56B-46EF-9FE5-3FA6E3D419E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9E90799-E1C4-432F-9A7D-95678D8E10FD} = {41A88579-FAB8-453F-A400-017D7B2EFE3F}
+		{C31327EB-002C-4B6D-BDBD-767C002394A3} = {41A88579-FAB8-453F-A400-017D7B2EFE3F}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Simple.MemoryCache.vsmdi
+	EndGlobalSection
+EndGlobal

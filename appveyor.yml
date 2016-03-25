@@ -11,12 +11,12 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: 1x/Tl0QmZr7ZmIcJ3iwBBrbeq+KlVTM7yBrn5qwaGiREoi9tXtSTDYdEc2y+doxX
 before_build:
-  - nuget restore ".\Simple.MemoryCache.sln"
+  - nuget restore ".\SimpleMemoryCache.sln"
 build:
-  project: .\Simple.MemoryCache.sln
+  project: .\SimpleMemoryCache.sln
   verbosity: minimal
 test_script:
 - ps: >-
-    .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:nunit-console.exe -register:user "-targetargs:""test\Simple.MemoryCache.UnitTest\bin\$env:CONFIGURATION\Simple.MemoryCache.UnitTest.dll" "test\Simple.MemoryCache.IntegrationTest\bin\$env:CONFIGURATION\Simple.MemoryCache.IntegrationTest.dll"" /noshadow" -filter:"+[Simple.MemoryCache*]*" -output:opencoverCoverage.xml
+    .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:nunit-console.exe -register:user "-targetargs:""test\SimpleMemoryCache.UnitTest\bin\$env:CONFIGURATION\SimpleMemoryCache.UnitTest.dll" "test\SimpleMemoryCache.IntegrationTest\bin\$env:CONFIGURATION\SimpleMemoryCache.IntegrationTest.dll"" /noshadow" -filter:"+[SimpleMemoryCache*]*" -output:opencoverCoverage.xml
 
     .\packages\coveralls.net.0.5.0\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
